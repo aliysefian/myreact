@@ -5,11 +5,11 @@ class ListGroup extends Component {
 
   render() {
     return (
-      <ul class="list-group" style={{ cursor: "pointer" }}>
+      <ul className="list-group" style={{ cursor: "pointer" }}>
         {this.props.items.map(cat => (
           <li
             key={cat._id}
-            class={this.handleCategoryActiveClass(cat._id)}
+            className={this.handleCategoryActiveClass(cat._id)}
             onClick={() => this.props.onItemSelect(cat)}
           >
             {cat.name}

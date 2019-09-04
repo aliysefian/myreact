@@ -17,10 +17,13 @@ class Pagination extends Component {
 
     return (
       <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul className="pagination">
           {pages.map(m => (
-            <li key={m} class={this.handleCurrentPage(m)}>
-              <a class="page-link" onClick={() => this.props.onPageChange(m)}>
+            <li key={m} className={this.handleCurrentPage(m)}>
+              <a
+                className="page-link"
+                onClick={() => this.props.onPageChange(m)}
+              >
                 {m}
               </a>
             </li>
