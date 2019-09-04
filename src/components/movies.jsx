@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
+import { getGenres } from "../services/fakeGenreService";
 import Like from "./like";
 import Pagination from "./comman/pagination";
 import paginate from "../utils/paginate";
+import ListGroup from "./comman/listGroup";
 class Movies extends Component {
   state = {
     movies: getMovies(),
     pageSize: 4,
-    currentPage: 1
+    currentPage: 1,
+    currentGeneres: 1,
+    generes: getGenres()
   };
   handleDelete = movie => {
     console.log(movie);
@@ -28,6 +32,11 @@ class Movies extends Component {
     console.log("SS", movies_tot[idFind].liked);
     this.setState({ movies: movies_tot });
   };
+  handleGeneresSelected = generes => {
+    this.setState({ currentGeneres: generes._id });
+
+    console.log("geneers", generes);
+  };
   render() {
     if (this.state.movies.length === 0) {
       return <h1>There is no Movie</h1>;
@@ -38,50 +47,59 @@ class Movies extends Component {
       this.state.pageSize
     );
     return (
-      <div>
-        <h2>total nummer of movies {this.state.movies.length}</h2>
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">title</th>
-              <th scope="col">gener</th>
-              <th scope="col">stock</th>
-            </tr>
-          </thead>
-          <tbody>
-            {movies.map(movie => (
-              <tr key={movie._id}>
-                <td>{movie.title}</td>
-                <td>{movie.genre.name}</td>
-                <td>{movie.numberInStock}</td>
-                <td>{movie.dailyRentalRate}</td>
-                <td>
-                  <Like
-                    liked={movie.liked}
-                    onLikeChanges={this.handleLikeChanges}
-                    movie={movie}
-                  />
-                </td>
-                <td>
-                  <button
-                    onClick={() => {
-                      this.handleDelete(movie);
-                    }}
-                    className="btn btn-danger btn-sm "
-                  >
-                    Delete
-                  </button>
-                </td>
+      <div className="row">
+        <div className="col-2">
+          <ListGroup
+            items={this.state.generes}
+            onItemSelect={this.handleGeneresSelected}
+            currentGeneres={this.state.currentGeneres}
+          />
+        </div>
+        <div className="col">
+          <h2>total number of movies {this.state.movies.length}</h2>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">title</th>
+                <th scope="col">gener</th>
+                <th scope="col">stock</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-        <Pagination
-          itemCount={this.state.movies.length}
-          pageSize={this.state.pageSize}
-          onPageChange={this.handlePaginationChange}
-          currentPage={this.state.currentPage}
-        />
+            </thead>
+            <tbody>
+              {movies.map(movie => (
+                <tr key={movie._id}>
+                  <td>{movie.title}</td>
+                  <td>{movie.genre.name}</td>
+                  <td>{movie.numberInStock}</td>
+                  <td>{movie.dailyRentalRate}</td>
+                  <td>
+                    <Like
+                      liked={movie.liked}
+                      onLikeChanges={this.handleLikeChanges}
+                      movie={movie}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      onClick={() => {
+                        this.handleDelete(movie);
+                      }}
+                      className="btn btn-danger btn-sm "
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <Pagination
+            itemCount={this.state.movies.length}
+            pageSize={this.state.pageSize}
+            onPageChange={this.handlePaginationChange}
+            currentPage={this.state.currentPage}
+          />
+        </div>
       </div>
     );
   }
