@@ -3,9 +3,18 @@ import "./App.css";
 import Movies from "./components/movies";
 import Counters from "./components/counters";
 import NavBar from "./components/navbar";
-import { Route, BrowserRouter as Router, Link, Switch } from "react-router-dom";
+import {
+  Route,
+  BrowserRouter as Router,
+  Link,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import Product from "./components/product";
 import AdminDashboard from "./components/admin/admindashboard";
+import NavBarRoute from "./components/navbarroute";
+import NotFound from "./components/comman/notFound";
+import LoginForm from "./components/loginForm";
 class App extends Component {
   state = {
     countersData: [{ id: 1, name: 88 }, { id: 2, name: 2 }]
@@ -47,42 +56,36 @@ class App extends Component {
   };
 
   render() {
-    console.log("app render");
     return (
-      <Router>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about/">About</Link>
-          </li>
-          <li>
-            <Link to="/counter">Users</Link>
-          </li>
-          <li>
-            <Link to="/admin">admin</Link>
-          </li>
-        </ul>
+      <div>
+        <NavBarRoute />
         <div>
-          <Route exact path="/" component={Movies} />
-          <Route path="/about" component={Product} />
-          <Route path="/admin" component={AdminDashboard} />
-          <Route
-            path="/counter"
-            render={() => (
-              <Counters
-                onReset={this.handleReset}
-                onDelete={this.handleDelete}
-                onIncrements={this.onIncrements}
-                onDecrements={this.handleDecrements}
-                countersData={this.state.countersData}
+          <main className="container">
+            <Switch>
+              <Route exact path="/movies" component={Movies} />
+              <Route exact path="/login" component={LoginForm} />
+              <Route path="/about" component={Product} />
+              <Route path="/admin" component={AdminDashboard} />
+              <Route
+                path="/counter"
+                render={() => (
+                  <Counters
+                    onReset={this.handleReset}
+                    onDelete={this.handleDelete}
+                    onIncrements={this.onIncrements}
+                    onDecrements={this.handleDecrements}
+                    countersData={this.state.countersData}
+                  />
+                )}
               />
-            )}
-          />
+              <Route path={"/not-found"} component={NotFound} />
+              <Redirect exact from={"/"} to={"/movies"} />
+              <Redirect to={"/not-found"} />
+            </Switch>
+          </main>
         </div>
         {/* <Route path="/topics" component={Topics} /> */}
-      </Router>
+      </div>
       // <div>
       //   <NavBar
       //     totalCount={this.state.countersData.filter(c => c.name > 0).length}
