@@ -7,12 +7,12 @@ const Input = ({ onChange, name, label, value, errors }) => {
         value={value}
         onChange={onChange}
         type="text"
-        class="form-control"
+        className="form-control"
         id={name}
         name={name}
         placeholder={"Enter " + name}
       />
-      {errors && <div class="alert alert-danger">{errors}</div>}
+      {errors && <div className="alert alert-danger">{errors}</div>}
     </div>
   );
 };

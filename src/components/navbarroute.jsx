@@ -6,27 +6,27 @@ class NavBarRoute extends Component {
   render() {
     return (
       <div>
-        <ul class="nav">
-          <li class="nav-item">
+        <ul className="nav">
+          <li className="nav-item">
             <Link className="nav-link active" to={"/"}>
               Movies
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link className="nav-link" to={"/counter"}>
               Counter
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <Link className="nav-link" to={"/login"}>
               Login
             </Link>
           </li>
-          <li class="nav-item">
+          <li className="nav-item">
             <a
-              class="nav-link disabled"
+              className="nav-link disabled"
               href="#"
-              tabindex="-1"
+              tabIndex="-1"
               aria-disabled="true"
             >
               Disabled
