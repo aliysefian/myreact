@@ -15,6 +15,8 @@ import AdminDashboard from "./components/admin/admindashboard";
 import NavBarRoute from "./components/navbarroute";
 import NotFound from "./components/comman/notFound";
 import LoginForm from "./components/loginForm";
+import Register from "./components/register";
+import MovieCreate from "./components/newmovie";
 class App extends Component {
   state = {
     countersData: [{ id: 1, name: 88 }, { id: 2, name: 2 }]
@@ -65,7 +67,9 @@ class App extends Component {
               <Route exact path="/movies" component={Movies} />
               <Route exact path="/login" component={LoginForm} />
               <Route path="/about" component={Product} />
-              <Route path="/admin" component={AdminDashboard} />
+              <Route path="/register" component={Register} />
+              <Route path="/movie/new" component={MovieCreate} />
+
               <Route
                 path="/counter"
                 render={() => (

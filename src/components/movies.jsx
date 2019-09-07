@@ -5,6 +5,7 @@ import Like from "./like";
 import Pagination from "./comman/pagination";
 import paginate from "../utils/paginate";
 import ListGroup from "./comman/listGroup";
+import { Redirect, BrowserRouter as Router, Link } from "react-router-dom";
 class Movies extends Component {
   state = {
     movies: getMovies(),
@@ -37,6 +38,7 @@ class Movies extends Component {
 
     console.log("geneers", generes);
   };
+
   render() {
     if (this.state.movies.length === 0) {
       return <h1>There is no Movie</h1>;
@@ -56,12 +58,15 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
+          <Link className="btn btn-primary" to="movie/new">
+            New Movie
+          </Link>
           <h2>total number of movies {this.state.movies.length}</h2>
           <table className="table">
             <thead>
               <tr>
                 <th scope="col">title</th>
-                <th scope="col">gener</th>
+                <th scope="col">genere</th>
                 <th scope="col">stock</th>
               </tr>
             </thead>

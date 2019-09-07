@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
+import Input from "./input";
+import Select from "./select";
 
 class Form extends Component {
   state = {
@@ -13,7 +15,6 @@ class Form extends Component {
     if (!res.error) {
       return null;
     }
-    console.log("wwwwww", res);
 
     const errors = {};
     for (let item of res.error.details) {
@@ -45,6 +46,50 @@ class Form extends Component {
     data[input.name] = input.value;
     this.setState({ data: data, errors: errors });
   };
+  renderButton(label) {
+    return (
+      <button
+        disabled={this.validate()}
+        type="submit"
+        className="btn btn-primary"
+      >
+        {label}
+      </button>
+    );
+  }
+  renderSelect = (name, label, data) => {
+    const { errors } = this.state;
+    return (
+      // <select class="custom-select">
+      //   <option selected>Open this select menu</option>
+      //   {dt.map(m => (
+      //     <option value={m._id}>{m.name}</option>
+      //   ))}
+      //   {/* <option value="2">Two</option>
+      //   <option value="3">Three</option> */}
+      // </select>
+      <Select
+        name={name}
+        label={label}
+        data={data}
+        onChange={this.handleChange}
+        errors={errors[name]}
+      />
+    );
+  };
+  renderInput(name, label, type = "text") {
+    const { data, errors } = this.state;
+    return (
+      <Input
+        type={type}
+        name={name}
+        value={data[name]}
+        label={label}
+        onChange={this.handleChange}
+        errors={errors[name]}
+      />
+    );
+  }
 }
 
 export default Form;
