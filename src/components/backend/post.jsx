@@ -1,20 +1,22 @@
 import React, { Component } from "react";
-import axios from "axios";
+import http from "../services/httpService";
 import Posts from "./post";
 import { Link, Route } from "react-router-dom";
 import { async } from "q";
-const apiEndPoint = `https://jsonplaceholder.typicode.com/posts`;
+import config from "../../config.json";
+const apiEndPoint = config.apiEndPoint;
+
 class PostsView extends Component {
   state = { posts: [] };
   componentDidMount() {
-    axios.get(apiEndPoint).then(res => {
+    http.get(apiEndPoint).then(res => {
       const posts = res.data;
       this.setState({ posts: posts });
     });
   }
   handleAddPost = async () => {
     const obj = { title: "a", body: "222" };
-    const { data: post } = await axios.post(apiEndPoint, obj);
+    const { data: post } = await http.post(apiEndPoint, obj);
     const posts = [post, ...this.state.posts];
     this.setState({ posts: posts });
     console.log(post);
@@ -22,14 +24,14 @@ class PostsView extends Component {
   handlePostUpdate = async post => {
     // console.log(post);
     post.title = "update";
-    const { data: postUpdate } = await axios.put(
+    const { data: postUpdate } = await http.put(
       apiEndPoint + "/" + post.id,
       post
     );
     const oldPost = [...this.state.posts];
     const index = oldPost.indexOf(post);
     oldPost[index] = { ...post };
-    // axios.patch(apiEndPoint, { title: post.title });
+    // http.patch(apiEndPoint, { title: post.title });
     this.setState({ oldPost });
 
     console.log(postUpdate);
@@ -39,20 +41,16 @@ class PostsView extends Component {
     const posts = this.state.posts.filter(m => m.id !== post.id);
     this.setState({ posts });
     try {
-      const { data, status } = await axios.delete(apiEndPoint + "/" + post.id);
+      const { data, status } = await http.delete(apiEndPoint + "/" + post.id);
       // throw new Error("");
     } catch (ex) {
       //expected(404 :notfound )
       if (ex.response && ex.response.status) {
         alert("notfound maybe deleted ");
-      } else {
-        console.log("Login error", ex);
-        alert("unexpectd");
       }
       //UnExpected
 
       this.setState({ posts: originalPosts });
-      alert("something wrongs");
     }
     // console.log(data, status);
   };
