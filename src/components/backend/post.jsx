@@ -20,12 +20,25 @@ class PostsView extends Component {
     console.log(post);
   };
   handlePostUpdate = async post => {
+    // console.log(post);
     post.title = "update";
     const { data: postUpdate } = await axios.put(
       apiEndPoint + "/" + post.id,
       post
     );
+    const oldPost = [...this.state.posts];
+    const index = oldPost.indexOf(post);
+    oldPost[index] = { ...post };
+    // axios.patch(apiEndPoint, { title: post.title });
+    this.setState({ oldPost });
+
     console.log(postUpdate);
+  };
+  handlePostDelete = async post => {
+    const { data, status } = await axios.delete(apiEndPoint + "/" + post.id);
+    const posts = this.state.posts.filter(m => m.id !== post.id);
+    this.setState({ posts });
+    console.log(data, status);
   };
   render() {
     return (
@@ -51,8 +64,7 @@ class PostsView extends Component {
                   {" "}
                   <button
                     className="btn btn-primary"
-                    post={m}
-                    onClick={this.handlePostUpdate}
+                    onClick={() => this.handlePostUpdate(m)}
                   >
                     Update
                   </button>
@@ -60,10 +72,10 @@ class PostsView extends Component {
                 <td>
                   {" "}
                   <button
-                    className="btn btn-primary"
-                    onClick={this.handleAddPost}
+                    className="btn btn-alert"
+                    onClick={() => this.handlePostDelete(m)}
                   >
-                    Add
+                    Delete
                   </button>
                 </td>
               </tr>
