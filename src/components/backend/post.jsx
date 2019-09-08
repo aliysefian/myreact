@@ -4,6 +4,8 @@ import Posts from "./post";
 import { Link, Route } from "react-router-dom";
 import { async } from "q";
 import config from "../../config.json";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const apiEndPoint = config.apiEndPoint;
 
 class PostsView extends Component {
@@ -41,7 +43,9 @@ class PostsView extends Component {
     const posts = this.state.posts.filter(m => m.id !== post.id);
     this.setState({ posts });
     try {
-      const { data, status } = await http.delete(apiEndPoint + "/" + post.id);
+      const { data, status } = await http.delete(
+        "sss" + apiEndPoint + "/" + post.id
+      );
       // throw new Error("");
     } catch (ex) {
       //expected(404 :notfound )
@@ -58,6 +62,7 @@ class PostsView extends Component {
     return (
       <div>
         {/* <Route path={"/post/new"} Component={} /> */}
+        <ToastContainer rtl style={{ fontFamily: "Bzar" }} />
         Posts{this.state.posts.length}
         <button className="btn btn-primary" onClick={this.handleAddPost}>
           Add

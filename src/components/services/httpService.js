@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 axios.interceptors.response.use(null, error => {
   // console.log("inter response error", error);
   const expectedError =
@@ -9,7 +10,8 @@ axios.interceptors.response.use(null, error => {
     return Promise.reject(error);
   } else {
     console.log("logging error", error);
-    alert("An Expected");
+    // toast.error("An Expected");
+    toast("خطا در برقراری ارتباط با سرور");
   }
 });
 export default {
