@@ -8,12 +8,14 @@ import "font-awesome/css/font-awesome.css";
 import { BrowserRouter } from "react-router-dom";
 import Counter from "./components/counter";
 import PostsView from "./components/backend/post";
+import MovieList from "./components/movie/movieList";
 
 // ReactDOM.render(elements,document.getElementById('root'));
 ReactDOM.render(
   <BrowserRouter>
     {/* <App /> */}
-    <PostsView />
+    {/* <PostsView /> */}
+    <MovieList />
   </BrowserRouter>,
   document.getElementById("root")
 );

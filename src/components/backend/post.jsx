@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import http from "../services/httpService";
 import Posts from "./post";
-import { Link, Route } from "react-router-dom";
-import { async } from "q";
+
 import config from "../../config.json";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
