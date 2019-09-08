@@ -7,11 +7,13 @@ import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 import { BrowserRouter } from "react-router-dom";
 import Counter from "./components/counter";
+import PostsView from "./components/backend/post";
 
 // ReactDOM.render(elements,document.getElementById('root'));
 ReactDOM.render(
   <BrowserRouter>
-    <App />
+    {/* <App /> */}
+    <PostsView />
   </BrowserRouter>,
   document.getElementById("root")
 );

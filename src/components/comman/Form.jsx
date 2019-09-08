@@ -60,14 +60,6 @@ class Form extends Component {
   renderSelect = (name, label, data) => {
     const { errors } = this.state;
     return (
-      // <select class="custom-select">
-      //   <option selected>Open this select menu</option>
-      //   {dt.map(m => (
-      //     <option value={m._id}>{m.name}</option>
-      //   ))}
-      //   {/* <option value="2">Two</option>
-      //   <option value="3">Three</option> */}
-      // </select>
       <Select
         name={name}
         label={label}
