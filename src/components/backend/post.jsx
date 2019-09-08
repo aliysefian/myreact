@@ -35,10 +35,26 @@ class PostsView extends Component {
     console.log(postUpdate);
   };
   handlePostDelete = async post => {
-    const { data, status } = await axios.delete(apiEndPoint + "/" + post.id);
+    const originalPosts = this.state.posts;
     const posts = this.state.posts.filter(m => m.id !== post.id);
     this.setState({ posts });
-    console.log(data, status);
+    try {
+      const { data, status } = await axios.delete(apiEndPoint + "/" + post.id);
+      // throw new Error("");
+    } catch (ex) {
+      //expected(404 :notfound )
+      if (ex.response && ex.response.status) {
+        alert("notfound maybe deleted ");
+      } else {
+        console.log("Login error", ex);
+        alert("unexpectd");
+      }
+      //UnExpected
+
+      this.setState({ posts: originalPosts });
+      alert("something wrongs");
+    }
+    // console.log(data, status);
   };
   render() {
     return (
