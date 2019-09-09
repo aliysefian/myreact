@@ -1,4 +1,8 @@
 {
-    "apiEndPoint": "https://jsonplaceholder.typicode.com/posts"
+    "apiEndPo": "https://jsonplaceholder.typicode.com/posts"
+    ,
+    "apiUrl": "http://127.0.0.1:8000/"
+
+
 
 }

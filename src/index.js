@@ -13,9 +13,9 @@ import MovieList from "./components/movie/movieList";
 // ReactDOM.render(elements,document.getElementById('root'));
 ReactDOM.render(
   <BrowserRouter>
-    {/* <App /> */}
+     <App />
     {/* <PostsView /> */}
-    <MovieList />
+    {/*<MovieList />*/}
   </BrowserRouter>,
   document.getElementById("root")
 );
