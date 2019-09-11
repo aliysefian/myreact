@@ -11,6 +11,10 @@ class NavBarRoute extends Component {
             <Link className="nav-link active" to={"/"}>
               Movies
             </Link>
+          </li> <li className="nav-item">
+            <Link className="nav-link active" to={"/movie/list"}>
+              MoviesLIst
+            </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to={"/counter"}>

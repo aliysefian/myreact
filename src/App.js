@@ -17,6 +17,7 @@ import NotFound from "./components/comman/notFound";
 import LoginForm from "./components/loginForm";
 import Register from "./components/register";
 import MovieCreate from "./components/newmovie";
+import MovieList from "./components/movie/movieList";
 class App extends Component {
   state = {
     countersData: [{ id: 1, name: 88 }, { id: 2, name: 2 }]
@@ -69,6 +70,7 @@ class App extends Component {
               <Route path="/about" component={Product} />
               <Route path="/register" component={Register} />
               <Route path="/movie/new" component={MovieCreate} />
+              <Route path="/movie/list" component={MovieList} />
 
               <Route
                 path="/counter"
